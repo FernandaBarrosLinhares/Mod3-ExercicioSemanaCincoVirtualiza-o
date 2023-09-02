@@ -1,0 +1,27 @@
+services:
+  backend:
+    image: fernandabarroslinhares/crud:latest
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - POSTGRES_DB=example
+    networks:
+      - spring-postgres
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      -c:areadetrabalho
+    networks:
+      - spring-postgres
+    environment:
+      - POSTGRES_DB=root
+      - POSTGRES_PASSWORD=root
+      #       POSTGRES_PASSWORD: "root"
+    expose:
+      - 5432
+volumes:
+  db-data:
+networks:
+  spring-postgres:
